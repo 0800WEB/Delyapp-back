@@ -1,0 +1,94 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+
+import app from '../app.js'; // Importar la instancia de la aplicación Express desde 'app.js'
+import debugModule from 'debug'; // Módulo para depuración
+import http from 'http'; // Módulo HTTP para crear el servidor
+
+const debug = debugModule('myapp:server'); // Inicializar la depuración con el nombre 'myapp:server'
+
+/**
+ * Get port from environment and store in Express.
+ */
+
+const port = normalizePort(process.env.PORT || '8080'); // Obtener el puerto del entorno o usar el puerto 3000 como predeterminado
+app.set('port', port); // Establecer el puerto en la aplicación Express
+
+/**
+ * Create HTTP server.
+ */
+
+const server = http.createServer(app); // Crear un servidor HTTP utilizando la instancia de la aplicación Express
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+
+server.listen(port, () => {
+  console.log("server listening on port " + port); // Imprimir un mensaje cuando el servidor esté escuchando en el puerto especificado
+});
+server.on('error', onError); // Manejar errores de servidor
+server.on('listening', onListening); // Escuchar el evento de servidor "listening"
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+
+function normalizePort(val) {
+  const port = parseInt(val, 10); // Convertir el valor a un número entero
+
+  if (isNaN(port)) {
+    // named pipe
+    return val; // Devolver el valor si no es un número (por ejemplo, una tubería con nombre)
+  }
+
+  if (port >= 0) {
+    // port number
+    return port; // Devolver el número de puerto si es mayor o igual a cero
+  }
+
+  return false; // Devolver false si no es un valor válido de puerto
+}
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+
+function onError(error) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  const bind = typeof port === 'string'
+    ? `Pipe ${port}`
+    : `Port ${port}`;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error(`${bind} requires elevated privileges`);
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(`${bind} is already in use`);
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+
+function onListening() {
+  const addr = server.address();
+  const bind = typeof addr === 'string'
+    ? `pipe ${addr}`
+    : `port ${addr.port}`;
+  debug(`Listening on ${bind}`);
+}
