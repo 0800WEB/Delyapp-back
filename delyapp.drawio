@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2024-07-05T23:03:07.680Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:127.0) Gecko/20100101 Firefox/127.0" etag="ZRGmiS_fpjbdkAkRfBT-" version="24.6.4" type="github">
+<mxfile host="app.diagrams.net" modified="2024-07-09T04:04:03.335Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36" etag="coYhqFQAikInxTm0z0we" version="24.2.2" type="github">
   <diagram id="R2lEEEUBdFMjLlhIrx00" name="Page-1">
-    <mxGraphModel dx="1195" dy="628" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0" extFonts="Permanent Marker^https://fonts.googleapis.com/css?family=Permanent+Marker">
+    <mxGraphModel dx="961" dy="537" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0" extFonts="Permanent Marker^https://fonts.googleapis.com/css?family=Permanent+Marker">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -562,6 +562,26 @@
         </mxCell>
         <mxCell id="EPbJx3VBAS1g0BrYEu9k-164" value="&lt;li&gt;&lt;strong&gt;Users&lt;/strong&gt; -&amp;gt; &lt;strong&gt;Orders&lt;/strong&gt;: Un usuario puede tener múltiples pedidos.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Orders&lt;/strong&gt; -&amp;gt; &lt;strong&gt;Products&lt;/strong&gt;: Un pedido puede tener múltiples productos.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Products&lt;/strong&gt; -&amp;gt; &lt;strong&gt;Categories&lt;/strong&gt;: Un producto pertenece a una categoría.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Users&lt;/strong&gt; -&amp;gt; &lt;strong&gt;Points&lt;/strong&gt;: Un usuario puede tener múltiples registros de puntos acumulados.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Promotions&lt;/strong&gt; -&amp;gt; &lt;strong&gt;Products&lt;/strong&gt;: Una promoción puede aplicarse a múltiples productos.&lt;/li&gt;" style="text;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="70" y="720" width="300" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="pIrme1ArnpMRXnv30mY6-38" value="[string]" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;fontStyle=1;strokeColor=default;" vertex="1" parent="1">
+          <mxGeometry x="70" y="620" width="90" height="30" as="geometry">
+            <mxRectangle width="90" height="30" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pIrme1ArnpMRXnv30mY6-39" value="cupon" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry x="160" y="620" width="210" height="30" as="geometry">
+            <mxRectangle width="210" height="30" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pIrme1ArnpMRXnv30mY6-40" value="[string]" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;fontStyle=1;strokeColor=default;" vertex="1" parent="1">
+          <mxGeometry x="70" y="650" width="90" height="30" as="geometry">
+            <mxRectangle width="90" height="30" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pIrme1ArnpMRXnv30mY6-41" value="points" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry x="160" y="650" width="210" height="30" as="geometry">
+            <mxRectangle width="210" height="30" as="alternateBounds" />
+          </mxGeometry>
         </mxCell>
       </root>
     </mxGraphModel>
