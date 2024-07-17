@@ -1,17 +1,18 @@
-import { Schema,model } from 'mongoose'
+import mongoose from 'mongoose';
+const { Schema, model } = mongoose;
 
-let collection = 'users'            //nombre de la coleccion donde se van a guardar todos los documentos
-let schema = new Schema({           //molde de los datos que se van a guardar en esa coleccion
-    email: { type:String,required:true },
-    password: { type:String,required:true },
-    photo: { type:String,required:true },
-    role: { type:Number,default:0 },
-    online: { type:Boolean,default:false },
-    verified: { type:Boolean,default:true },    
-    verify_code: { type:String }
-},{
-    timestamps:true
-})
+const userSchema = new Schema({
+  name: { type: String, required: true },
+  email: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+  address: { type: String, required: true },
+  phone: { type: String, required: true },
+  role: { type: Number, required: true, default:0 },
+  is_online: { type: Boolean, required: true },
+  ageVerified: { type: Boolean, default: false },
+  is_verified: { type: Boolean, required: true },
+  verify_code: { type: String, required: true }
+}, { timestamps: true });
 
-let User = model(collection,schema)
-export default User
+const User = model('User', userSchema);
+export default User;
