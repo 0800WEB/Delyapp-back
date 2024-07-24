@@ -6,7 +6,7 @@ let signUp = async (req, res, next) => {
 	req.body.is_online = false;
 	req.body.role = 0;
 	req.body.is_verified = false;
-	req.body.verify_code = crypto.randomBytes(10).toString('hex');
+	req.body.verify_code = crypto.randomBytes(2).toString('hex');
 	req.body.password = bcryptjs.hashSync(req.body.password, 10);
 	try {
 		await User.create(req.body);

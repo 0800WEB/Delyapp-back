@@ -19,4 +19,4 @@ export default router;
     línea 8: La función de la ruta es una función anónima que se ejecuta cuando se recibe una solicitud a la ruta. En este caso, la función de la ruta simplemente envía una respuesta con el texto "Welcome gente".
     línea 11: Exportamos el objeto router. Esto permite que otros módulos o archivos de código hagan referencia al router.
     
- */
+ */     

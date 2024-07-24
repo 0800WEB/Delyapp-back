@@ -11,7 +11,12 @@ import { __dirname } from './utils/util.js';
 // Crear una instancia de la aplicación Express
 const app = express();
 /* el método .use se utiliza para agregar middleware a la cadena de manejo de solicitudes. El middleware es una función que se ejecuta en el proceso de manejo de una solicitud HTTP antes de que llegue a su manejador final. Esto permite realizar tareas como la autenticación, validación de datos, manipulación de encabezados, entre otras, antes de que la solicitud llegue a la ruta o función de manejo principal. */
-app.use(cors())
+const corsOptions = {
+  origin: '*', // Permitir todos los orígenes
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos permitidos
+  allowedHeaders: ['Content-Type', 'Authorization'], // Encabezados permitidos
+};
+app.use(cors(corsOptions))
 app.use(logger('dev')); // Configurar el registro de solicitudes en modo "dev"
 app.use(express.json()); // Analizar solicitudes JSON
 app.use(express.urlencoded({ extended: false })); // Analizar solicitudes de formularios

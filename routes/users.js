@@ -18,9 +18,9 @@ router.get('/', getUsers);
 router.post('/signup', accountExistsSignUp, signUp);
 router.post('/signin', signin)
 router.post('/verify/resend_code', reSend)
-router.put('/verify/:verify_code', userIsVerified)
+router.patch('/verify/:verify_code', userIsVerified)
 router.post('/reset_password', passport.authenticate('jwt', { session: false }), verifyCurrentPassword, resetPassword)
-router.post('/signout', passport.authenticate('jwt', { session: false }), signOut)
+// router.post('/signout', passport.authenticate('jwt', { session: false }), signOut)
 router.put('/:id', updateUser);
 router.delete('/:id', deleteUser);
 
