@@ -13,13 +13,10 @@ async function sendEmail(data) {
     //OPCIONALMENTE verificar el transporte
     await trasport.verify();
     await trasport.sendMail({
-      from: `ADOPTME <${GOOGLE_EMAIL}>`,
+      from: data.from,
       to: data.to,
-      subject: `USER ${data.first_name.toUpperCase()} REGISTERED!`,
-      html: `
-        <h1 style="color: red">WELCOME TO ADOPTME!</h1>
-        <p>VERIFY CODE: ${data.code}</p>
-      `,
+      subject:data.subject,
+      html: data.template,
     });
   } catch (error) {
     throw error;

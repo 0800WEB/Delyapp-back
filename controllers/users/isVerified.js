@@ -2,7 +2,7 @@ import User from "../../models/User.js";
 let userIsVerified = async (req, res, next) => {
     try {
         let userVerified = await User.findOneAndUpdate(
-            { verify_code: req.params.verify_code },
+            { verify_code: req.params.verify_code, _id: req.user._id },
             { is_verified: true },
             { new: true }
         )
