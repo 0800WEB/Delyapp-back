@@ -11,6 +11,7 @@ import reSend from '../controllers/users/reSendEmail.js';
 import passport from '../middlewares/passport.js';
 import passwordIsOk from '../middlewares/passwordIsOk.js';
 import accountExistsSignIn from '../middlewares/accountSignIn.js';
+import updateUser from 
 //import forgotPassword from '../controllers/users/forgotPassword.js'
 
 const router = express.Router();
@@ -22,6 +23,7 @@ router.post('/verify/resend_code', passport.authenticate('jwt', { session: false
 router.patch('/verify/:verify_code', passport.authenticate('jwt', { session: false }), userIsVerified)
 router.post('/reset_password', passport.authenticate('jwt', { session: false }), verifyCurrentPassword, resetPassword)
 router.post('/signout', passport.authenticate('jwt', { session: false }), signOut)
+router.patch('/update', passport.authenticate('jwt', { session: false }), signOut)
 //router.post('/forgot_password', forgotPassword)
 
 export default router;

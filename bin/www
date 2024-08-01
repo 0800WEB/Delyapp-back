@@ -14,7 +14,7 @@ const debug = debugModule('myapp:server'); // Inicializar la depuración con el 
  * Get port from environment and store in Express.
  */
 
-const port = normalizePort(process.env.PORT || '8080'); // Obtener el puerto del entorno o usar el puerto 3000 como predeterminado
+const port = normalizePort(process.env.PORT || '3000'); // Obtener el puerto del entorno o usar el puerto 3000 como predeterminado
 app.set('port', port); // Establecer el puerto en la aplicación Express
 
 /**
