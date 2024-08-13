@@ -1,8 +1,9 @@
 import bcryptjs from 'bcryptjs';
+import User from '../models/User.js';
 
 const verifyCurrentPassword = async (req, res, next) => {
     try {
-        let { user } = req
+        let user = await User.findById(req.user._id).exec();
         let { oldPassword } = req.body
         if (!user) {
             return res.status(404).json({
