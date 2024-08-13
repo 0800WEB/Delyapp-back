@@ -1,5 +1,4 @@
 import express from 'express';
-
 import accountExistsSignUp from '../middlewares/accountSignUp.js';
 import signUp from '../controllers/users/signUp.js';
 import signin from '../controllers/users/signIn.js';
@@ -13,12 +12,14 @@ import passwordIsOk from '../middlewares/passwordIsOk.js';
 import accountExistsSignIn from '../middlewares/accountSignIn.js';
 import { getOneUser, getUsers } from '../controllers/users/getUsers.js';
 
+import validator from '../middlewares/validator.js';
+import { userSignUp, userSignIn } from '../schemas/users.js'
 //import forgotPassword from '../controllers/users/forgotPassword.js'
 
 const router = express.Router();
 
 /* GET users listing. */
-router.post('/signup', accountExistsSignUp, signUp);
+router.post('/signup', accountExistsSignUp, validator(userSignUp), signUp);
 router.post('/signin', accountExistsSignIn, passwordIsOk, signin)
 router.post('/verify/resend_code', passport.authenticate('jwt', { session: false }), reSend)
 router.patch('/verify/:verify_code', passport.authenticate('jwt', { session: false }), userIsVerified)
