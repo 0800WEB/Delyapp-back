@@ -11,6 +11,7 @@ import reSend from '../controllers/users/reSendEmail.js';
 import passport from '../middlewares/passport.js';
 import passwordIsOk from '../middlewares/passwordIsOk.js';
 import accountExistsSignIn from '../middlewares/accountSignIn.js';
+import { getOneUser, getUsers } from '../controllers/users/getUsers.js';
 
 //import forgotPassword from '../controllers/users/forgotPassword.js'
 
@@ -24,6 +25,8 @@ router.patch('/verify/:verify_code', passport.authenticate('jwt', { session: fal
 router.post('/reset_password', passport.authenticate('jwt', { session: false }), verifyCurrentPassword, resetPassword)
 router.post('/signout', passport.authenticate('jwt', { session: false }), signOut)
 router.patch('/update', passport.authenticate('jwt', { session: false }), signOut)
+router.get('/', passport.authenticate('jwt', { session: false }), getUsers)
+router.get('/get-one-user',passport.authenticate('jwt', { session: false }), getOneUser)
 //router.post('/forgot_password', forgotPassword)
 
 export default router;
