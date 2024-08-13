@@ -2,7 +2,7 @@ import Cart from "../../models/Cart.js";
 
 const clearCart = async (req, res) => {
     const userId = req.user?._id.toString(); 
-    console.log("Userid:", userId)
+
     if (!userId) {
         return res.status(400).json({ success: false, message: 'Usuario no autorizado' });
     }

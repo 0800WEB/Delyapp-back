@@ -27,7 +27,7 @@ const updateStock = async (req, res) => {
             cart.items[itemIndex].stock = stock;
             await cart.save();
         } else {
-            return res.status(404).json({ success: false, message: 'Product not in cart' });
+            return res.status(404).json({ success: false, message: 'Producto no disponible en carro de compras' });
         }
 
         return res.status(200).json({ success: true, cart });

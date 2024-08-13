@@ -29,9 +29,9 @@ const removeFromCart = async (req, res) => {
         const productInCart = cart.products[productIndex];
 
         if (quantity >= productInCart.quantity) {
-            cart.products.splice(productIndex, 1); // Eliminar el producto
+            cart.products.splice(productIndex, 1); 
         } else {
-            productInCart.quantity -= quantity; // Reducir la cantidad
+            productInCart.quantity -= quantity; 
         }
 
         // Calcular el precio total
