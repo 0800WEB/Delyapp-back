@@ -1,16 +1,17 @@
 import Cart from '../../models/Cart.js';
 
 const getCart = async (req, res, next) => {
-    const userId = req.user._id; // Asumiendo que el ID del usuario está disponible en req.user
+    const userId = req.user._id; 
+    const cartId = req.params.id; 
 
     try {
-        // Buscar el carrito del usuario
-        const cart = await Cart.findOne({ user: userId }).populate('products.product');
+        // Buscar el carrito del usuario con el ID proporcionado
+        const cart = await Cart.findOne({ _id: cartId, user: userId }).populate('products.product');
 
         if (!cart) {
             return res.status(404).json({
                 success: false,
-                message: 'Cart not found'
+                message: 'Carro de compras no encontrado'
             });
         }
 
@@ -22,9 +23,10 @@ const getCart = async (req, res, next) => {
         console.error(error);
         return res.status(500).json({
             success: false,
-            message: 'An error occurred while retrieving the cart'
+            message: 'Ocurrio un error al obtener el carro de compras'
         });
     }
 }
 
 export default getCart;
+

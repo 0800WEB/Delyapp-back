@@ -1,18 +1,18 @@
 import Cart from '../../models/Cart.js';
 import Product from '../../models/Product.js';
 
-const removeFromCart = async (req, res, next) => {
-    const userId = req.user._id; // Asumiendo que el ID del usuario está disponible en req.user
-    const { productId } = req.body;
+const removeFromCart = async (req, res) => {
+    const userId = req.user._id.toString();
+    const { productId, quantity } = req.body;
 
     try {
         // Buscar el carrito del usuario
-        let cart = await Cart.findOne({ user: userId });
+        const cart = await Cart.findOne({ user: userId });
 
         if (!cart) {
             return res.status(404).json({
                 success: false,
-                message: 'Cart not found'
+                message: 'Carro de compras no encontrado'
             });
         }
 
@@ -22,31 +22,39 @@ const removeFromCart = async (req, res, next) => {
         if (productIndex === -1) {
             return res.status(404).json({
                 success: false,
-                message: 'Product not found in cart'
+                message: 'Producto no encontrado en el carro de compras'
             });
         }
 
-        // Eliminar el producto del carrito
-        cart.products.splice(productIndex, 1);
+        const productInCart = cart.products[productIndex];
+
+        if (quantity >= productInCart.quantity) {
+            cart.products.splice(productIndex, 1); // Eliminar el producto
+        } else {
+            productInCart.quantity -= quantity; // Reducir la cantidad
+        }
 
         // Calcular el precio total
-        cart.totalPrice = cart.products.reduce((total, item) => {
-            return total + item.quantity * item.product.price;
-        }, 0);
+        const updatedCart = await Cart.findById(cart._id).populate('products.product');
+        cart.totalPrice = await updatedCart.products.reduce(async (totalPromise, item) => {
+            const total = await totalPromise;
+            const product = await Product.findById(item.product);
+            return total + (product.price * item.quantity);
+        }, Promise.resolve(0));
 
         // Guardar el carrito
         await cart.save();
 
         return res.status(200).json({
             success: true,
-            message: 'Product removed from cart',
+            message: 'Producto eliminado del carrito',
             cart
         });
     } catch (error) {
-        console.error(error);
+        console.error('Error al eliminar el producto del carrito:', error);
         return res.status(500).json({
             success: false,
-            message: 'An error occurred while removing from cart'
+            message: 'Ocurrió un error al eliminar del carrito'
         });
     }
 }
