@@ -11,7 +11,7 @@ import reSend from '../controllers/users/reSendEmail.js';
 import passport from '../middlewares/passport.js';
 import passwordIsOk from '../middlewares/passwordIsOk.js';
 import accountExistsSignIn from '../middlewares/accountSignIn.js';
-import updateUser from 
+
 //import forgotPassword from '../controllers/users/forgotPassword.js'
 
 const router = express.Router();

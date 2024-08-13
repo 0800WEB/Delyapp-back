@@ -1,63 +1,56 @@
-import Cart from '../../models/Cart.js';
 import Product from '../../models/Product.js';
+import Cart from '../../models/Cart.js';
 
-const addToCart = async (req, res, next) => {
-    const userId = req.user._id; // Asumiendo que el ID del usuario está disponible en req.user
-    const { productId, quantity } = req.body;
+const addToCart = async (req, res) => {
+    const { productId, stock } = req.body;
+    const userId = req.user._id.toString(); 
+
+    console.log(req.body);
+    console.log("userid:", userId);
 
     try {
-        // Verificar si el producto existe
         const product = await Product.findById(productId);
         if (!product) {
-            return res.status(404).json({
-                success: false,
-                message: 'Product not found'
-            });
+            return res.status(404).json({ success: false, message: 'Producto no encontrado' });
         }
 
-        // Buscar el carrito del usuario
+        if (product.stock < stock) {
+            return res.status(400).json({ success: false, message: 'Producto sin stock' });
+        }
+
         let cart = await Cart.findOne({ user: userId });
-
         if (!cart) {
-            // Si el carrito no existe, crear uno nuevo
-            cart = new Cart({
-                user: userId,
-                products: [],
-                totalPrice: 0
-            });
+            cart = new Cart({ user: userId, products: [], totalPrice: 0 });
         }
 
-        // Verificar si el producto ya está en el carrito
+        if (!Array.isArray(cart.products)) {
+            cart.products = [];
+        }
+
         const productIndex = cart.products.findIndex(p => p.product.toString() === productId);
-        
         if (productIndex > -1) {
-            // Si el producto ya está en el carrito, actualizar la cantidad
-            cart.products[productIndex].quantity += quantity;
+
+            cart.products[productIndex].quantity += stock;
         } else {
-            // Si el producto no está en el carrito, añadirlo
-            cart.products.push({ product: productId, quantity });
+            cart.products.push({ product: productId, quantity: stock });
         }
 
-        // Calcular el precio total
-        cart.totalPrice = cart.products.reduce((total, item) => {
-            return total + item.quantity * product.price;
-        }, 0);
+        let totalPrice = 0;
+        for (const item of cart.products) {
+            const product = await Product.findById(item.product);
+            if (product) {
+                totalPrice += product.price * item.quantity;
+            }
+        }
 
-        // Guardar el carrito
+        cart.totalPrice = totalPrice;
         await cart.save();
 
-        return res.status(200).json({
-            success: true,
-            message: 'Product added to cart',
-            cart
-        });
+        return res.status(200).json({ success: true, cart });
     } catch (error) {
         console.error(error);
-        return res.status(500).json({
-            success: false,
-            message: 'An error occurred while adding to cart'
-        });
+        return res.status(500).json({ success: false, message: 'Error interno en el servidor' });
     }
-}
+};
 
 export default addToCart;

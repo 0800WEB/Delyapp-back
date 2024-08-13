@@ -1,26 +1,54 @@
 import User from '../../models/User.js';
 import jwt from 'jsonwebtoken';
+import bcrypt from 'bcryptjs'; 
 
 
 let signin = async (req, res, next) => {
     try {
-        let user = await User.findOneAndUpdate(
-            { email: req.body.email },
-            { is_online: true },
-            { new: true }
-        )
+
+        const user = await User.findOne({ email: req.body.email });
+
+
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: 'Usuario no encontrado'
+            });
+        }
+
+
+        const isMatch = await bcrypt.compare(req.body.password, user.password);
+        if (!isMatch) {
+            return res.status(400).json({
+                success: false,
+                message: 'Credenciales inválidas'
+            });
+        }
+
+
+        user.is_online = true;
+        await user.save();
+
+
         const token = jwt.sign(
             { id: user._id },
             process.env.SECRET,
-            { expiresIn: 60 * 60 * 24 * 10 }
-        )
+            { expiresIn: '10d' } 
+        );
+
+
         return res.status(200).json({
             success: true,
             token,
-            user
+            user: {
+                id: user._id,
+                email: user.email
+               
+            }
         });
     } catch (error) {
-        next(error);
+        console.error(error);
+        next(error); 
     }
 }
 
