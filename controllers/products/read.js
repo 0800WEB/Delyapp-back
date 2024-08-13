@@ -18,6 +18,7 @@ const read = async (req, res) => {
         if (category) queries.category = { $in: category.split(',') };
 
         // Pagination using page and limit
+        
         const products = await Product.find(queries)
             .sort(sortOptions)
             .limit(pagination.limit)
