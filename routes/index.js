@@ -7,6 +7,7 @@ import cartsRouter from './carts.js'
 import couponsRouter from './coupons.js'
 import favoritesRouter from './favorites.js'
 import paymentsRouter from './payments.js'
+import ordersRoutes from './orders.js'
 // Creamos un nuevo objeto router
 const router = express.Router();
 
@@ -17,6 +18,7 @@ router.use('/carts', cartsRouter)
 router.use('/favorites', favoritesRouter)
 router.use('/coupons', couponsRouter)
 router.use('/payments', paymentsRouter)
+router.use('/orders', ordersRoutes)
 // Exportamos el objeto router
 export default router;
 

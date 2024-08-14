@@ -2,7 +2,7 @@ import Product from '../../models/Product.js';
 
 const read = async (req, res) => {
     try {
-        const { sort, name, priceOrder, category, page = 1, limit = 8 } = req.query;
+        const { sort, name, priceOrder, category, page = 4, limit = 8 } = req.query;
 
         let queries = {};
         let sortOptions = {};

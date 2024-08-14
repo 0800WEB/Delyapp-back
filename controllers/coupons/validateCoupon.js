@@ -4,14 +4,14 @@ const validateCoupon = async (req, res, next) => {
     const { code } = req.body;
 
     try {
-        // Buscar el cupón en la base de datos
+
         const coupon = await Coupon.findOne({ code });
 
         // Verificar si el cupón existe
         if (!coupon) {
             return res.status(404).json({
                 success: false,
-                message: 'Coupon not found'
+                message: 'Cupón no encontrado'
             });
         }
 
@@ -19,7 +19,7 @@ const validateCoupon = async (req, res, next) => {
         if (coupon.expiryDate < new Date()) {
             return res.status(400).json({
                 success: false,
-                message: 'Coupon has expired'
+                message: 'Cupón expirado'
             });
         }
 
@@ -27,18 +27,18 @@ const validateCoupon = async (req, res, next) => {
         if (coupon.usageLimit <= 0) {
             return res.status(400).json({
                 success: false,
-                message: 'Coupon usage limit reached'
+                message: 'El cupón ha excedido el límite de uso'
             });
         }
 
-        // Reducir el límite de uso del cupón
+        
         coupon.usageLimit -= 1;
         await coupon.save();
 
-        // Si todo es válido, devolver el descuento
+        
         return res.status(200).json({
             success: true,
-            message: 'Coupon is valid',
+            message: '¡Has usado tu cupón de descuento!',
             discountPercentage: coupon.discountPercentage,
             discountAmount: coupon.discountAmount
         });
@@ -46,7 +46,7 @@ const validateCoupon = async (req, res, next) => {
         console.error(error);
         return res.status(500).json({
             success: false,
-            message: 'An error occurred while validating the coupon'
+            message: '¡Ocurrió un error al validar el cupón!'
         });
     }
 }
