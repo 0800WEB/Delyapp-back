@@ -13,7 +13,7 @@ import accountExistsSignIn from '../middlewares/accountSignIn.js';
 import { getOneUser, getUsers } from '../controllers/users/getUsers.js';
 
 import validator from '../middlewares/validator.js';
-import { userSignUp, userSignIn } from '../schemas/users.js'
+import { userSignUp } from '../schemas/users.js'
 //import forgotPassword from '../controllers/users/forgotPassword.js'
 
 const router = express.Router();
