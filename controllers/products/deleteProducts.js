@@ -9,7 +9,7 @@ const deleteProduct = async (req, res) => {
             return res.status(404).json({ success: false, message: 'Producto no encontrado' });
         }
 
-        return res.status(200).json({ success: true, message: 'Producto eliminado exitosamente' });
+        return res.status(200).json({ success: true, message: 'Producto eliminado exitósamente' });
     } catch (error) {
         console.error(error);
         return res.status(500).json({ success: false, message: 'Error interno en el servidor' });

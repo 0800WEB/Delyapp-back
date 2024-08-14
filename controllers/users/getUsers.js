@@ -2,7 +2,7 @@ import User from '../../models/User.js';
 
 async function getOneUser(req, res, next) {
     const { email } = req.query
-    console.log(req.query)
+
     let queries = {}
     if (!!email) {
 
@@ -15,7 +15,8 @@ async function getOneUser(req, res, next) {
             response: allUsers
         });
     } catch (error) {
-
+        console.error(error);
+        return res.status(500).json({ success: false, message: 'Error interno en el servidor' });
     }
 }
 async function getUsers(req, res, next) {
@@ -25,7 +26,8 @@ async function getUsers(req, res, next) {
             response: allUsers
         });
     } catch (error) {
-
+        console.error(error);
+        return res.status(500).json({ success: false, message: 'Error interno en el servidor' });
     }
 }
 
