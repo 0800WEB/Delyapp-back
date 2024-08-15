@@ -57,14 +57,14 @@ const createOrder = async (req, res) => {
             await useCoupon();
         }
 
-        // Crear la orden
+        // Crear la orden con o sin cupón
         const newOrder = new Order({
             user: userId,
             products: validatedProducts,
             totalPrice,
             deliveryAddress,
             paymentMethod,
-            coupon: couponId ? couponId : null  // Guardar el ID del cupón si existe
+            coupon: couponId || null  // Guardar el ID del cupón si existe, sino null
         });
 
         await newOrder.save();
