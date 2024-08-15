@@ -35,7 +35,7 @@ const createCoupon = async (req, res) => {
         });
     } catch (error) {
         console.error(error);
-        return res.status(500).json({ success: false, message: 'Error interno en el servidor', error: error.message });
+        return res.status(500).json({ success: false, message: 'Hubo un error al crear el cupón, prueba más tarde', error: error.message });
     }
 };
 

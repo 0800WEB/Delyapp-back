@@ -7,7 +7,8 @@ const couponSchema = new Schema({
   discountPercentage: { type: Number, default: 0 },
   discountAmount: { type: Number, default: 0 },
   expiryDate: { type: Date, required: true },
-  usageLimit: { type: Number, default: 1 }
+  usageLimit: { type: Number, default: 1 },
+  users:[{type: Schema.Types.ObjectId, ref: 'User'}]
 });
 
 const Coupon = model('Coupon', couponSchema);

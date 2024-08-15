@@ -1,12 +1,11 @@
 import Coupon from '../../models/Coupon.js';
 
-const validateCoupon = async (req, res, next) => {
+const useCoupon = async (req, res) => {
     const { code } = req.body;
+    const userId = req.user._id.toString(); // Asumiendo que tienes el userId en req.user gracias a passport
 
     try {
-
         const coupon = await Coupon.findOne({ code });
-
         // Verificar si el cupón existe
         if (!coupon) {
             return res.status(404).json({
@@ -15,30 +14,26 @@ const validateCoupon = async (req, res, next) => {
             });
         }
 
-        // Verificar si el cupón ha expirado
-        if (coupon.expiryDate < new Date()) {
+        // Verificar si el usuario ya usó el cupón
+        if (coupon.users.includes(userId)) {
             return res.status(400).json({
                 success: false,
-                message: 'Cupón expirado'
+                message: 'Este cupón ya ha sido utilizado por este usuario.'
             });
         }
 
-        // Verificar si el cupón ha alcanzado su límite de uso
-        if (coupon.usageLimit <= 0) {
-            return res.status(400).json({
-                success: false,
-                message: 'El cupón ha excedido el límite de uso'
-            });
-        }
-
-        
+        // Reducir el límite de uso del cupón
         coupon.usageLimit -= 1;
+
+        // Agregar el usuario al arreglo de usuarios que han usado el cupón
+        coupon.users.push(userId);
+
+        // Guardar los cambios en el cupón
         await coupon.save();
 
-        
         return res.status(200).json({
             success: true,
-            message: '¡Has usado tu cupón de descuento!',
+            message: 'Has usado tu cupón de descuento',
             discountPercentage: coupon.discountPercentage,
             discountAmount: coupon.discountAmount
         });
@@ -46,9 +41,9 @@ const validateCoupon = async (req, res, next) => {
         console.error(error);
         return res.status(500).json({
             success: false,
-            message: '¡Ocurrió un error al validar el cupón!'
+            message: 'Ocurrió un error al validar el cupón'
         });
     }
 }
 
-export default validateCoupon;
+export default useCoupon;
