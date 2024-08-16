@@ -1,8 +1,9 @@
 import Order from '../../models/Order.js';
 import Product from '../../models/Product.js';
 import Cart from '../../models/Cart.js';
-import Coupon from '../../models/Coupon.js';
-import useCoupon from '../coupons/useCoupon.js';
+import { handleCouponUsage } from '../../utils/couponUtils.js';  // Importar la función utilitaria
+import { validateCartProducts } from '../../utils/productUtils.js'; // Importar la función utilitaria
+import { clearCart } from '../../utils/clearCart.util.js'; // Importar la función utilitaria
 
 const createOrder = async (req, res) => {
     const { cartId, deliveryAddress, paymentMethod, couponId = null } = req.body;
@@ -15,46 +16,22 @@ const createOrder = async (req, res) => {
             return res.status(404).json({ success: false, message: 'Carrito no encontrado' });
         }
 
-        let totalPrice = 0;
-        const validatedProducts = [];
-
         // Validar productos y calcular el precio total
-        for (const item of cart.products) {
-            const product = await Product.findById(item.product);
-            if (!product) {
-                return res.status(404).json({ success: false, message: `Producto con ID ${item.product} no encontrado` });
-            }
-            if (product.stock < item.quantity) {
-                return res.status(400).json({ success: false, message: `Stock insuficiente para el producto ${product.name}` });
-            }
+        const { validatedProducts, totalPrice: initialTotalPrice } = await validateCartProducts(cart.products);
 
-            validatedProducts.push({
-                product: item.product,
-                quantity: item.quantity
-            });
-
-            totalPrice += product.price * item.quantity;
-        }
+        let totalPrice = initialTotalPrice;
 
         // Si hay un cupón, aplicar el descuento correspondiente
         if (couponId) {
-            const coupon = await Coupon.findById(couponId);
-            if (!coupon) {
-                return res.status(404).json({ success: false, message: 'Cupón no encontrado' });
-            }
+            const coupon = await handleCouponUsage(couponId, userId);
 
-            // Verificar el tipo de cupón y aplicar el descuento
             if (coupon.discountPercentage && coupon.discountPercentage > 0) {
-                totalPrice -= (totalPrice * (coupon.discountPercentage / 100));
+                totalPrice -= totalPrice * (coupon.discountPercentage / 100);
             } else if (coupon.discountAmount && coupon.discountAmount > 0) {
                 totalPrice -= coupon.discountAmount;
             }
 
-            // Asegurarse de que el precio total no sea negativo
             if (totalPrice < 0) totalPrice = 0;
-
-            // Marcar el cupón como usado
-            await useCoupon();
         }
 
         // Crear la orden con o sin cupón
@@ -64,10 +41,14 @@ const createOrder = async (req, res) => {
             totalPrice,
             deliveryAddress,
             paymentMethod,
-            coupon: couponId || null  // Guardar el ID del cupón si existe, sino null
+            coupon: couponId || null,
         });
 
         await newOrder.save();
+
+        // Limpiar el carrito del usuario después de crear la orden
+        await clearCart(userId);
+
         return res.status(201).json({ success: true, order: newOrder });
     } catch (error) {
         console.error(error);
