@@ -12,7 +12,7 @@ import oneCouponPerUser from '../middlewares/oneCouponPerUser.js';
 let router = express.Router()
 
 router.get('/all-coupons',passport.authenticate('jwt', { session: false }),isAdmin, getCoupons )
-router.post('/', passport.authenticate('jwt', { session: false }), useCoupon)
+router.post('/:code', passport.authenticate('jwt', { session: false }), useCoupon)
 router.post('/',  passport.authenticate('jwt', { session: false }),isAdmin,validator(couponSchema), createCoupon)
 router.delete('/:id',passport.authenticate('jwt', { session: false }), isAdmin, deleteCoupon )
 router.get('/:code',passport.authenticate('jwt', { session: false }), oneCouponPerUser, readCoupon)

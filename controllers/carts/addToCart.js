@@ -2,7 +2,7 @@ import Product from '../../models/Product.js';
 import Cart from '../../models/Cart.js';
 
 const addToCart = async (req, res) => {
-    const { productId, stock } = req.body;
+    const { productId, quantity } = req.body;
     const userId = req.user._id.toString(); 
 
     console.log(req.body);
@@ -14,7 +14,7 @@ const addToCart = async (req, res) => {
             return res.status(404).json({ success: false, message: 'Producto no encontrado' });
         }
 
-        if (product.stock < stock) {
+        if (product.stock < quantity) {
             return res.status(400).json({ success: false, message: 'Producto sin stock' });
         }
 
@@ -30,9 +30,9 @@ const addToCart = async (req, res) => {
         const productIndex = cart.products.findIndex(p => p.product.toString() === productId);
         if (productIndex > -1) {
 
-            cart.products[productIndex].quantity += stock;
+            cart.products[productIndex].quantity += quantity;
         } else {
-            cart.products.push({ product: productId, quantity: stock });
+            cart.products.push({ product: productId, quantity: quantity });
         }
 
         let totalPrice = 0;
