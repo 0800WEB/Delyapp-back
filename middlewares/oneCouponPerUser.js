@@ -2,8 +2,8 @@ import Coupon from "../models/Coupon.js";
 
 const oneCouponPerUser = async (req, res, next) => {
     try {
-        const { code } = req.body;
-        const userId = req.user._id.toString(); // Obtenemos el userId desde req.user
+        const { code } = req.params;
+        const userId = req.user._id; // Obtenemos el userId desde req.user
 
         // Buscamos un cupón que coincida con el código y que tenga el userId en su array de users
         const couponUsed = await Coupon.findOne({ code: code, users: userId });
