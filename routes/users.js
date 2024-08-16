@@ -22,8 +22,8 @@ const router = express.Router();
 /* GET users listing. */
 router.post('/signup', accountExistsSignUp, validator(userSignUp), signUp);
 router.post('/signin', accountExistsSignIn, passwordIsOk, signin)
-router.post('/verify/resend_code', passport.authenticate('jwt', { session: false }), reSend)
-router.patch('/verify/:verify_code', passport.authenticate('jwt', { session: false }), userIsVerified)
+router.post('/verify/resend_code', reSend)
+router.patch('/verify/:verify_code', userIsVerified)
 router.post('/reset_password', passport.authenticate('jwt', { session: false }), verifyCurrentPassword, resetPassword)
 router.post('/signout', passport.authenticate('jwt', { session: false }), signOut)
 router.patch('/update', passport.authenticate('jwt', { session: false }), signOut)
