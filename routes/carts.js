@@ -11,7 +11,7 @@ const router = express.Router();
 
 router.post('/', passport.authenticate('jwt', { session: false }), addToCart);
 router.delete('/', passport.authenticate('jwt', { session: false }), removeFromCart);
-router.get('/:id',passport.authenticate('jwt', { session: false }), read);
+router.get('/',passport.authenticate('jwt', { session: false }), read);
 router.get('/',passport.authenticate('jwt', { session: false }), isAdmin, readAll);
 router.delete('/clear-cart',passport.authenticate('jwt', { session: false }),clearCart )
 router.put('/', passport.authenticate('jwt', { session: false }), updateStock)

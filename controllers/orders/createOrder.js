@@ -15,7 +15,6 @@ const createOrder = async (req, res) => {
         if (!cart) {
             return res.status(404).json({ success: false, message: 'Carrito no encontrado' });
         }
-
         // Validar productos y calcular el precio total
         const { validatedProducts, totalPrice: initialTotalPrice } = await validateCartProducts(cart.products);
 

@@ -42,8 +42,9 @@ let signin = async (req, res, next) => {
             token,
             user: {
                 id: user._id,
-                email: user.email
-               
+                email: user.email,
+                phone:user.phone,
+                name:user.name
             }
         });
     } catch (error) {

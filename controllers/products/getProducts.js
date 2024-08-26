@@ -1,6 +1,6 @@
 import Product from '../../models/Product.js';
 
-const read = async (req, res) => {
+const   read = async (req, res) => {
     try {
         const { sort, name, priceOrder, category, page = 1, limit } = req.query;
 
