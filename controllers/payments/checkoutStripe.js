@@ -6,7 +6,7 @@ const stripeClient = new stripe(stripeSecretKey);
 const createCheckoutSession = async (req, res) => {
   
   try {
-    const {totalUsd, customerEmail} = req.body
+    const { totalUsd, customerEmail } = req.body
       console.log(req.body)
     const session = await stripeClient.checkout.sessions.create({
       customer_email: customerEmail,

@@ -1,11 +1,15 @@
 import User from "../../models/User.js";
 let userIsVerified = async (req, res, next) => {
     try {
+
+        let { email } = req.body
+
         let userVerified = await User.findOneAndUpdate(
-            { verify_code: req.params.verify_code, _id: req.user._id },
+            { verify_code: req.params.verify_code, email },
             { is_verified: true },
             { new: true }
         )
+        
         if (userVerified) {
             return res
             .status(200)
