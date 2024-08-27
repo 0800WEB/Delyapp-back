@@ -6,6 +6,6 @@ import passport from '../middlewares/passport.js';
 const router = express.Router();
 
 
-router.post('/',passport.authenticate('jwt', { session: false }),createCheckoutSession)
+router.post('/', createCheckoutSession)
 
 export default router

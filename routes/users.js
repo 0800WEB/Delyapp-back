@@ -16,7 +16,7 @@ import isAdmin from '../middlewares/isAdmin.js'
 import validator from '../middlewares/validator.js';
 import { userSignUp } from '../schemas/users.js'
 //import forgotPassword from '../controllers/users/forgotPassword.js'
-
+import updateUser from '../controllers/users/updateUser.js';
 const router = express.Router();
 
 /* GET users listing. */
@@ -26,7 +26,7 @@ router.post('/verify/resend_code', reSend)
 router.patch('/verify/:verify_code', userIsVerified)
 router.post('/reset_password', passport.authenticate('jwt', { session: false }), verifyCurrentPassword, resetPassword)
 router.post('/signout', passport.authenticate('jwt', { session: false }), signOut)
-router.patch('/update', passport.authenticate('jwt', { session: false }), signOut)
+router.patch('/update', passport.authenticate('jwt', { session: false }), updateUser)
 router.put('/create-admin/:id', passport.authenticate('jwt', { session: false }),isAdmin, createAdmin)
 router.get('/', passport.authenticate('jwt', { session: false }),isAdmin, getUsers)
 router.get('/total-customers', passport.authenticate('jwt', { session: false }),isAdmin, getTotalCustomers)

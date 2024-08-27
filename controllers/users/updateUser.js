@@ -3,7 +3,6 @@ import User from '../../models/User.js';
 const updateUser = async (req, res, next) => {
     const userId = req.user._id; // Asumiendo que el ID del usuario está disponible en req.user
     const { name, email, phone } = req.body;
-
     try {
  
         let user = await User.findById(userId);
@@ -19,10 +18,9 @@ const updateUser = async (req, res, next) => {
         user.name = name || user.name;
         user.email = email || user.email;
         user.phone = phone || user.phone;
-
         // Guardar los cambios
         await user.save();
-
+        
         return res.status(200).json({
             success: true,
             message: '¡Usuario actualizado con éxito!',

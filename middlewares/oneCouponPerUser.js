@@ -9,6 +9,7 @@ const oneCouponPerUser = async (req, res, next) => {
         const couponUsed = await Coupon.findOne({ code: code, users: userId });
 
         if (couponUsed) {
+            console.log("aca")
             return res.status(400).json({
                 success: false,
                 message: "Este cupón ya ha sido utilizado. No se puede volver a usar."
