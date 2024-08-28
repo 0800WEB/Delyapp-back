@@ -1,6 +1,6 @@
 import Product from '../../models/Product.js';
 
-const   read = async (req, res) => {
+const read = async (req, res) => {
     try {
         const { sort, name, priceOrder, category, page = 1, limit } = req.query;
 
@@ -10,7 +10,7 @@ const   read = async (req, res) => {
         let queries = {};
         let sortOptions = {};
 
-        // Validar y convertir page a entero
+        // Validar y convertir page a entero    
         const currentPage = parseInt(page, 10) > 0 ? parseInt(page, 10) : 1;
 
         if (sort) sortOptions[sort] = 1; // Ordenar por el campo especificado en orden ascendente
@@ -26,8 +26,8 @@ const   read = async (req, res) => {
         // Obtener productos con paginación, filtro y ordenación
         const products = await Product.find(queries)
             .sort(sortOptions)
-            .skip(skip)
-            .limit(paginationLimit);
+            /* .skip(skip)
+            .limit(paginationLimit); */
 
         // Contar el total de productos que coinciden con la consulta (opcional)
         const totalProducts = await Product.countDocuments(queries);

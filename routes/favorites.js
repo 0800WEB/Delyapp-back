@@ -9,6 +9,6 @@ const router = express.Router();
 
 router.post('/', passport.authenticate('jwt', { session: false }), toggleFavorite);
 router.delete('/', passport.authenticate('jwt', { session: false }), removeFromFavorites);
-router.get('/:id', passport.authenticate('jwt', { session: false }), read);
+router.get('/', passport.authenticate('jwt', { session: false }), read);
 
 export default router
