@@ -1,6 +1,7 @@
 import User from '../models/User.js';
 
 const isAdmin = async (req, res, next) => {
+    console.log(req.user)
     try {
         const userAdmin = await User.findById(req.user._id);
         if (!userAdmin) {
@@ -20,7 +21,7 @@ const isAdmin = async (req, res, next) => {
         return res.status(500).json({
             success: false,
             message: "Error interno del servidor",
-            error: error.message
+            error: error.message,
         });
     }
 };

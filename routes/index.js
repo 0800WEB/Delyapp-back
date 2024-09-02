@@ -19,6 +19,12 @@ router.use('/favorites', favoritesRouter)
 router.use('/coupons', couponsRouter)
 router.use('/payments', paymentsRouter)
 router.use('/orders', ordersRoutes)
+router.get('/connect', async(req,res)=>{
+    res.json({
+        success: true,
+        message:"database connected"
+    })
+})
 // Exportamos el objeto router
 export default router;
 
