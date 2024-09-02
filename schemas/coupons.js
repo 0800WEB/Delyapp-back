@@ -51,7 +51,7 @@ export const couponSchema = Joi.object({
     }),
   usageLimit: Joi.number()
     .integer()
-    .min(1)
+    .min(1)  // Evitar valores negativos o cero
     .default(1)
     .messages({
       'number.base': 'El límite de uso debe ser un número.',
@@ -59,6 +59,4 @@ export const couponSchema = Joi.object({
       'number.min': 'El límite de uso debe ser al menos 1.',
       'number.default': 'El límite de uso por defecto es 1.'
     })
-}).messages({
-  'object.unknown': 'No se permite el envío de propiedades adicionales.'
-});
+})

@@ -30,7 +30,16 @@ const getAllOrders = async (req, res) => {
         const paginationLimit = limit && parseInt(limit, 10) > 0 ? parseInt(limit, 10) : 10;
         const currentPage = parseInt(page, 10) > 0 ? parseInt(page, 10) : 1;
         const skip = (currentPage - 1) * paginationLimit;
+
+        // Realiza el populate tanto para el campo user, coupon como para los productos dentro del array
         const orders = await Order.find(query)
+            .populate('user', 'name email')
+            .populate('coupon', 'code discountPercentage discountAmount')
+            .populate({
+                path: 'products.product', // Hacemos populate en cada producto dentro del array
+                select: 'name price description', // Campos que deseas obtener del producto
+            })
+            .sort({ createdAt: -1 }) // Ordenar por fecha de creación de más reciente a más antigua
             .skip(skip)
             .limit(paginationLimit);
 

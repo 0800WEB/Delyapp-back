@@ -8,7 +8,7 @@ const orderSchema = new Schema({
     quantity: { type: Number, required: true }
   }],
   totalPrice: { type: Number, required: true },
-  status: { type: String, default: 'pendiente' }, // 'pendiente', 'en preparación', 'en camino', 'cancelado', 'entregado
+  status: { type: String, default: 'pendiente' }, // 'pendiente', 'en preparación', 'en camino', 'cancelado', 'entregado'
   deliveryAddress: { type: String, required: true },
   paymentMethod: { type: String, required: true },
   coupon: { type: Schema.Types.ObjectId, ref: 'Coupon', default: null } // Opcional, por defecto null

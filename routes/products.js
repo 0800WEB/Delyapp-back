@@ -1,22 +1,29 @@
 import express from 'express';
-//import read from '../controllers/products/read.js' // Este era el read viejo (no funcionaba bien)
-import readOne from '../controllers/products/readOne.js'
 import passport from '../middlewares/passport.js';
 import createProduct from '../controllers/products/createProducts.js';
 import updateProduct from '../controllers/products/updateProducts.js';
 import deleteProduct from '../controllers/products/deleteProducts.js';
 import getAllProducts from '../controllers/products/getProducts.js';
-import validator from '../middlewares/validator.js'
-import {productSchema} from '../schemas/product.js';
-import isAdmin from '../middlewares/isAdmin.js'
-
+import readOne from '../controllers/products/readOne.js';
+import validator from '../middlewares/validator.js';
+import { productSchema } from '../schemas/product.js';
+import isAdmin from '../middlewares/isAdmin.js';
+import { editProductSchema } from '../schemas/editProduct.js';
 const router = express.Router();
 
-//router.get('/',  passport.authenticate('jwt', { session: false }), read);
-router.get('/:id',  passport.authenticate('jwt', { session: false }), readOne);
-router.post("/create",  passport.authenticate('jwt', { session: false }),validator(productSchema) ,isAdmin,createProduct)
-router.put("/:id", passport.authenticate('jwt', { session: false }),isAdmin,  updateProduct)
-router.delete("/:id",  passport.authenticate('jwt', { session: false }),isAdmin, deleteProduct)
-router.get("/", passport.authenticate('jwt', { session: false }), getAllProducts)
+// Ruta para obtener todos los productos
+router.get('/', passport.authenticate('jwt', { session: false }), getAllProducts);
 
-export default router
+// Ruta para obtener un producto específico por ID
+router.get('/:id', passport.authenticate('jwt', { session: false }), readOne);
+
+// Ruta para crear un nuevo producto
+router.post('/create', passport.authenticate('jwt', { session: false }), isAdmin, validator(productSchema), createProduct);
+
+// Ruta para actualizar un producto existente por ID
+router.put('/:id', passport.authenticate('jwt', { session: false }), isAdmin, validator(editProductSchema), updateProduct);
+
+// Ruta para eliminar un producto por ID
+router.delete('/:id', passport.authenticate('jwt', { session: false }), isAdmin, deleteProduct);
+
+export default router;

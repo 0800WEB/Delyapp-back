@@ -1,6 +1,6 @@
 import Order from '../../models/Order.js';
 
-const readStatus = async (req, res) => {
+const readOrder = async (req, res) => {
     try {
         // Obtener el ID de la orden desde los parámetros de la solicitud
         const { orderId } = req.params;
@@ -19,7 +19,7 @@ const readStatus = async (req, res) => {
         }
 
         // Devolver el estado de la orden
-        res.status(200).json({ status: order.status });
+        res.status(200).json({ success:true, order});
 
     } catch (error) {
         // Manejar errores generales
@@ -28,4 +28,4 @@ const readStatus = async (req, res) => {
     }
 };
 
-export default readStatus;
+export default readOrder;

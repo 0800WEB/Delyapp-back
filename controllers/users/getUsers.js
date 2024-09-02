@@ -19,6 +19,17 @@ async function getOneUser(req, res, next) {
         return res.status(500).json({ success: false, message: 'Error interno en el servidor' });
     }
 }
+async function getCustomer(req, res) {
+    try {
+    let user = await User.findById(req.params.id);        
+    res.json(200,{
+        response:user
+    })
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ success: false, message: 'Error interno en el servidor' });
+    }
+}
 async function getUsers(req, res, next) {
     try {
         const allUsers = await User.find()
@@ -35,10 +46,7 @@ async function getTotalCustomers(req, res, next) {
     try {
         // Usamos countDocuments para contar el número de documentos donde "role" es igual a 0
         const totalCustomers = await User.countDocuments({ role: 0 });
-
-        res.json({
-            totalCustomers: totalCustomers
-        });
+        res.json(totalCustomers);
     } catch (error) {
         // Manejo de errores
         next(error); // Pasamos el error al middleware de manejo de errores
@@ -46,4 +54,4 @@ async function getTotalCustomers(req, res, next) {
 }
 
 
-export { getUsers, getOneUser, getTotalCustomers }
+export { getUsers, getOneUser, getTotalCustomers, getCustomer}

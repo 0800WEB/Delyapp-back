@@ -1,6 +1,7 @@
 import Product from '../../models/Product.js';
 
 const updateProduct = async (req, res) => {
+    console.log(req.body)
     const { id } = req.params;
     const { name, description, price, category, stock, images } = req.body;
 
