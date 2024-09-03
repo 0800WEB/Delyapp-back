@@ -42,6 +42,7 @@ const getTopOrderedProducts = async (req, res) => {
           _id: 0,
           productId: '$_id',
           name: '$productData.name',
+          description: '$productData.description',
           totalSold: 1,
           stock: '$productData.stock',
           price: '$productData.price',
