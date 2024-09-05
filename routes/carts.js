@@ -7,7 +7,7 @@ import clearCart from '../controllers/carts/clearCart.js';
 import updateStock from '../controllers/carts/updateCart.js';
 import isAdmin from '../middlewares/isAdmin.js';
 import readAll from '../controllers/carts/readAll.js';
-
+import repeatOrder from '../controllers/carts/repeatOrder.js'; 
 const router = express.Router();
 
 // Ruta para añadir un producto al carrito
@@ -27,5 +27,8 @@ router.delete('/clear-cart', passport.authenticate('jwt', { session: false }), c
 
 // Ruta para actualizar la cantidad de productos en el carrito
 router.put('/', passport.authenticate('jwt', { session: false }), updateStock);
+
+// Ruta para repetir una orden
+router.post('/repeat-order/:orderId', passport.authenticate('jwt', { session: false }), repeatOrder);
 
 export default router;
