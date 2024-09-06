@@ -22,7 +22,7 @@ let signUp = async (req, res, next) => {
     req.body.password = bcryptjs.hashSync(req.body.password, 10);
     try {
         await User.create(req.body);
-        await sendEmail({to:req.body.email, subject:`Verifica tu cuenta en Charro Negro 🥳`, template:templateVerification(req.body.verify_code)})
+        await sendEmail({to:req.body.email, subject:`Verifica tu cuenta en Dringo 🥳`, template:templateVerification(req.body.verify_code)})
         return res.status(201).json({
             success: true,
             message: "The user was created"

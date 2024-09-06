@@ -4,7 +4,7 @@ async function getOne(req, res, next) {
     try {
         let product = await Product.findById(req.params.id).select('-_id  -__v').populate("category", "name -_id")
         if (product) {
-            return res.status("201").json({
+            return res.status("200").json({
                 success: true,
                 product
             });

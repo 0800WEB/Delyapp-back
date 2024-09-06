@@ -157,7 +157,7 @@ img,p{margin:0;Margin:0;font-family:Lato,BlinkMacSystemFont,Segoe UI,Helvetica N
 <!--[if !mso]>-->
 <td class=t1 style="width:228px;">
 <!--<![endif]-->
-<a href="#" style="font-size:0px;" target=_blank><img class=t0 style="display:block;border:0;height:auto;width:100%;Margin:0;max-width:100%;" width=228 height=151.90625 alt="" src="https://8660c0e6-daea-4645-a33d-bd6711101818.b-cdn.net/e/7bcabf2e-8e00-4417-bddc-79bdab172311/31dc1e72-3648-47fc-8df9-25fe1b8d703f.png"/></a></td>
+<a href="#" style="font-size:0px;" target=_blank><img class=t0 style="display:block;border:0;height:auto;width:100%;Margin:0;max-width:100%;" width=228 height=151.90625 alt="" src="https://private-user-images.githubusercontent.com/166246438/364999164-5c531476-6f89-4019-a44f-4a3aad5d5848.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MjU2Mjk3NzUsIm5iZiI6MTcyNTYyOTQ3NSwicGF0aCI6Ii8xNjYyNDY0MzgvMzY0OTk5MTY0LTVjNTMxNDc2LTZmODktNDAxOS1hNDRmLTRhM2FhZDVkNTg0OC5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjQwOTA2JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI0MDkwNlQxMzMxMTVaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT1mY2VjYmJiODRlYTEwNWNkNzI0MjJmYjg3NjE5ZDc3Y2I4YWEzZGJmY2MxZjJiNjY0YzMwOWZjNjdmYzZlNDg0JlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZhY3Rvcl9pZD0wJmtleV9pZD0wJnJlcG9faWQ9MCJ9.TkYO2KjOlzvTXVopyPt93dPj4VTJ33d5jyE27amdNck"/></a></td>
 </tr></table>
 </td></tr><tr><td><div class=t3 style="mso-line-height-rule:exactly;mso-line-height-alt:40px;line-height:40px;font-size:1px;display:block;">&nbsp;&nbsp;</div></td></tr><tr><td align=center>
 <table class=t6 role=presentation cellpadding=0 cellspacing=0 style="Margin-left:auto;Margin-right:auto;">
@@ -179,7 +179,7 @@ img,p{margin:0;Margin:0;font-family:Lato,BlinkMacSystemFont,Segoe UI,Helvetica N
 <!--[if !mso]>-->
 <td class=t9 style="width:308px;">
 <!--<![endif]-->
-<p class=t7 style="margin:0;Margin:0;font-family:Inter,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Arial,sans-serif;line-height:22px;font-weight:500;font-style:normal;font-size:15px;text-decoration:none;text-transform:none;letter-spacing:-0.6px;direction:ltr;color:#424040;text-align:center;mso-line-height-rule:exactly;mso-text-raise:2px;">Para usar Charro Negro, <br/>valide su cuenta con el código de abajo.&nbsp;</p></td>
+<p class=t7 style="margin:0;Margin:0;font-family:Inter,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Arial,sans-serif;line-height:22px;font-weight:500;font-style:normal;font-size:15px;text-decoration:none;text-transform:none;letter-spacing:-0.6px;direction:ltr;color:#424040;text-align:center;mso-line-height-rule:exactly;mso-text-raise:2px;">Para usar Dringo, <br/>valide su cuenta con el código de abajo.&nbsp;</p></td>
 </tr></table>
 </td></tr><tr><td><div class=t12 style="mso-line-height-rule:exactly;mso-line-height-alt:40px;line-height:40px;font-size:1px;display:block;">&nbsp;&nbsp;</div></td></tr><tr><td align=center>
 <table class=t14 role=presentation cellpadding=0 cellspacing=0 style="Margin-left:auto;Margin-right:auto;">
@@ -201,7 +201,7 @@ img,p{margin:0;Margin:0;font-family:Lato,BlinkMacSystemFont,Segoe UI,Helvetica N
 <!--[if !mso]>-->
 <td class=t17 style="background-color:#F2EFF3;overflow:hidden;width:340px;padding:20px 30px 20px 30px;border-radius:8px 8px 8px 8px;">
 <!--<![endif]-->
-<p class=t15 style="margin:0;Margin:0;font-family:Albert Sans,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Arial,sans-serif;line-height:18px;font-weight:500;font-style:normal;font-size:12px;text-decoration:none;text-transform:none;direction:ltr;color:#84828E;text-align:center;mso-line-height-rule:exactly;mso-text-raise:2px;">Estás recibiendo este correo electrónico porque tienes una cuenta en Charro Negro. Si no estás seguro de por qué recibes esto, contáctanos respondiendo a este correo electrónico.</p></td>
+<p class=t15 style="margin:0;Margin:0;font-family:Albert Sans,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Arial,sans-serif;line-height:18px;font-weight:500;font-style:normal;font-size:12px;text-decoration:none;text-transform:none;direction:ltr;color:#84828E;text-align:center;mso-line-height-rule:exactly;mso-text-raise:2px;">Estás recibiendo este correo electrónico porque tienes una cuenta en Dringo. Si no estás seguro de por qué recibes esto, contáctanos respondiendo a este correo electrónico.</p></td>
 </tr></table>
 </td></tr></table></td>
 </tr></table>
