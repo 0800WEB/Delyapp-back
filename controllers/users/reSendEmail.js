@@ -1,12 +1,13 @@
 import User from "../../models/User.js"
 import sendEmail from '../../utils/mailing.util.js';
+import { templateVerification } from '../../utils/signup.template.js';
 
 let reSend = async (req, res, next) => {
     let user = await User.findOne({ email: req.body.email})
     try {
 
         if (user) {
-            await sendEmail({to:user.email, subject:`el asunto ${user.name}`, template:`aca el template html y el codigo ${user.verify_code}` })
+            await sendEmail({to:user.email, subject:`Verifica tu cuenta en Dringo 🥳 ${user.name}`, template:templateVerification(user.verify_code) })
             return res.status(200).json({success: true,message: "email reSend"})
         }
         return res.status(200).json({
