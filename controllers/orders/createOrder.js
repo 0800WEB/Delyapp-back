@@ -6,7 +6,7 @@ import { validateCartProducts } from '../../utils/productUtils.js'; // Importar 
 import { clearCart } from '../../utils/clearCart.util.js'; // Importar la función utilitaria
 
 const createOrder = async (req, res) => {
-    const { cartId, deliveryAddress, paymentMethod, couponId = null } = req.body;
+    const { cartId, deliveryAddress, paymentMethod, couponId = null, nota=null } = req.body;
     const userId = req.user._id.toString(); 
 
     try {
@@ -42,7 +42,7 @@ const createOrder = async (req, res) => {
             paymentMethod,
             coupon: couponId || null,
         });
-
+        if(nota) newOrder.nota = nota;
         await newOrder.save();
 
         // Limpiar el carrito del usuario después de crear la orden
