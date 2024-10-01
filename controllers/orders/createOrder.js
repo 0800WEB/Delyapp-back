@@ -6,7 +6,7 @@ import { validateCartProducts } from '../../utils/productUtils.js'; // Importar 
 import { clearCart } from '../../utils/clearCart.util.js'; // Importar la función utilitaria
 
 const createOrder = async (req, res) => {
-    const { cartId, deliveryAddress, paymentMethod, couponId = null, nota=null } = req.body;
+    const { cartId, deliveryAddress, paymentMethod, couponId = null, nota } = req.body;
     const userId = req.user._id.toString(); 
 
     try {
@@ -21,8 +21,9 @@ const createOrder = async (req, res) => {
         let totalPrice = initialTotalPrice;
 
         // Si hay un cupón, aplicar el descuento correspondiente
+        let coupon
         if (couponId) {
-            const coupon = await handleCouponUsage(couponId, userId);
+            coupon = await handleCouponUsage(couponId, userId);
 
             if (coupon.discountPercentage && coupon.discountPercentage > 0) {
                 totalPrice -= totalPrice * (coupon.discountPercentage / 100);
@@ -40,7 +41,7 @@ const createOrder = async (req, res) => {
             totalPrice,
             deliveryAddress,
             paymentMethod,
-            coupon: couponId || null,
+            coupon: coupon.title || null,
         });
         if(nota) newOrder.nota = nota;
         await newOrder.save();
