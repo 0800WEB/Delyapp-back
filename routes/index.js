@@ -8,6 +8,7 @@ import couponsRouter from './coupons.js'
 import favoritesRouter from './favorites.js'
 import paymentsRouter from './payments.js'
 import ordersRoutes from './orders.js'
+import bannersRoutes from './banners.js'
 // Creamos un nuevo objeto router
 const router = express.Router();
 
@@ -19,12 +20,8 @@ router.use('/favorites', favoritesRouter)
 router.use('/coupons', couponsRouter)
 router.use('/payments', paymentsRouter)
 router.use('/orders', ordersRoutes)
-router.get('/connect', async(req,res)=>{
-    res.json({
-        success: true,
-        message:"database connected"
-    })
-})
+router.use('/banners', bannersRoutes)
+
 // Exportamos el objeto router
 export default router;
 
