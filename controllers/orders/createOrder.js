@@ -41,7 +41,7 @@ const createOrder = async (req, res) => {
             totalPrice,
             deliveryAddress,
             paymentMethod,
-            coupon: coupon.code || null,
+            coupon: coupon.code ? coupon.code : null
         });
         if(nota) newOrder.nota = nota;
         await newOrder.save();
