@@ -7,7 +7,7 @@ import { clearCart } from '../../utils/clearCart.util.js'; // Importar la funci�
 
 const createOrder = async (req, res) => {
     const { cartId, deliveryAddress, paymentMethod, couponId = null, nota } = req.body;
-    const userId = req.user._id.toString(); 
+    const userId = req.user._id.toString();
 
     try {
         // Validar que el carrito exista
@@ -15,13 +15,14 @@ const createOrder = async (req, res) => {
         if (!cart) {
             return res.status(404).json({ success: false, message: 'Carrito no encontrado' });
         }
+
         // Validar productos y calcular el precio total
         const { validatedProducts, totalPrice: initialTotalPrice } = await validateCartProducts(cart.products);
 
         let totalPrice = initialTotalPrice;
 
         // Si hay un cupón, aplicar el descuento correspondiente
-        let coupon
+        let coupon = null;
         if (couponId) {
             coupon = await handleCouponUsage(couponId, userId);
 
@@ -41,9 +42,15 @@ const createOrder = async (req, res) => {
             totalPrice,
             deliveryAddress,
             paymentMethod,
-            coupon: coupon.code ? coupon.code : null
+            coupon: coupon ? {
+                code: coupon.code,
+                discountPercentage: coupon.discountPercentage,
+                discountAmount: coupon.discountAmount
+            } : null
         });
-        if(nota) newOrder.nota = nota;
+
+        if (nota) newOrder.nota = nota;
+
         await newOrder.save();
 
         // Limpiar el carrito del usuario después de crear la orden
