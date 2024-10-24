@@ -20,9 +20,12 @@ const repeatOrder = async (req, res) => {
 
         let cart = await Cart.findOne({ user: userId });
         if (!cart) {
-            cart = new Cart({ user: userId, products: [], totalPrice: 0 });
+          cart = new Cart({ user: userId, products: [], totalPrice: 0 });
         }
-
+        
+        // Limpiar el carrito 
+        cart.products = [];  
+        
         if (!Array.isArray(cart.products)) {
             cart.products = [];
         }

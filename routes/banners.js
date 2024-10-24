@@ -9,9 +9,9 @@ import deleteBanner from '../controllers/banners/delete.js';
 
 let router = express.Router();
 
-router.get('/', read_all); // Ruta para leer todas las categorías
-router.post('/', passport.authenticate('jwt', { session: false }),isAdmin, create); // Ruta para crear una nueva categoría (solo administradores)
-router.put('/:id', passport.authenticate('jwt', { session: false }),isAdmin, update); // Ruta para actualizar una categoría (solo administradores)
-router.delete('/:id', passport.authenticate('jwt', { session: false }),isAdmin, deleteBanner); // Ruta para eliminar una categoría (solo administradores)
+router.get('/', read_all); // Ruta para leer todas las banners
+router.post('/', passport.authenticate('jwt', { session: false }),isAdmin, create); // Ruta para crear una nueva banner (solo administradores)
+router.put('/:id', passport.authenticate('jwt', { session: false }),isAdmin, update); // Ruta para actualizar una banner (solo administradores)
+router.delete('/:id', passport.authenticate('jwt', { session: false }),isAdmin, deleteBanner); // Ruta para eliminar una banner (solo administradores)
 
 export default router;

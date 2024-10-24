@@ -27,13 +27,21 @@ const addToCart = async (req, res) => {
             cart.products = [];
         }
 
-        const productIndex = cart.products.findIndex(p => p.product.toString() === productId);
-        if (productIndex > -1) {
+        const productIndex = cart.products.findIndex(p => p.product.toString() === productId.toString());
 
-            cart.products[productIndex].quantity += quantity;
+        if (productIndex > -1) {
+            const newQuantity = cart.products[productIndex].quantity + quantity;
+            if (product.stock < newQuantity) {
+                return res.status(400).json({ success: false, message: 'No hay suficiente stock para esa cantidad' });
+            }
+            cart.products[productIndex].quantity = newQuantity;
         } else {
+            if (product.stock < quantity) {
+                return res.status(400).json({ success: false, message: 'No hay suficiente stock para esa cantidad' });
+            }
             cart.products.push({ product: productId, quantity: quantity });
         }
+        
 
         let totalPrice = 0;
         for (const item of cart.products) {
